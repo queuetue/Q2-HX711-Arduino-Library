@@ -1,6 +1,7 @@
 # Queuetue HX711 Arduino Library
 
-Copyright (c) 2015 Scott Russell (scott@queuetue.com), released under the MIT license.  See the LICENSE file for licensing details.
+Copyright (c) 2015 Scott Russell (scott@queuetue.com), released under the MIT license.  
+See the LICENSE file for licensing details.
 
 A simple Arduino driver for the HX711 ADC.
 
