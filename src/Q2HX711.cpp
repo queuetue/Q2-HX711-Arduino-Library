@@ -37,13 +37,13 @@ bool Q2HX711::readyToSend() {
 
 void Q2HX711::setGain(byte gain) {
   switch (gain) {
-    case 128:
+    case 128: // Input Channel A
       GAIN = 1;
       break;
-    case 64:
+    case 64: // Input Channel A
       GAIN = 3;
       break;
-    case 32:
+    case 32: // Input Channel B
       GAIN = 2;
       break;
   }
@@ -52,21 +52,31 @@ void Q2HX711::setGain(byte gain) {
   read();
 }
 
+/**
+ * Reads a value from the chip and returns the raw value.
+ */
 long Q2HX711::read() {
    while (!readyToSend());
 
+  // Read 24 bit data, most significant bit first.
   byte data[3];
-
   for (byte j = 3; j--;) {
-      data[j] = shiftIn(OUT_PIN,CLOCK_PIN, MSBFIRST);
+      data[j] = shiftIn(OUT_PIN, CLOCK_PIN, MSBFIRST);
   }
 
-  // set gain
+  // Set gain and input for next conversion by pulsing the clock signal 1 to 3 times.
   for (int i = 0; i < GAIN; i++) {
     digitalWrite(CLOCK_PIN, HIGH);
     digitalWrite(CLOCK_PIN, LOW);
   }
 
-  data[2] ^= 0x80;
-  return ((uint32_t) data[2] << 16) | ((uint32_t) data[1] << 8) | (uint32_t) data[0];
+  // Collect the bytes in a signed integer
+  long value = ((uint32_t) data[2] << 16) | ((uint32_t) data[1] << 8) | (uint32_t) data[0];
+  // The value read from the HX711 is in two's complement.
+  // Normally the most significant bit of a 24 bit number represents 2^23.
+  // But for a 24 bit two's complement number, the bit represents -2^23 (a negative value).
+  if (value & (1L << 23)) {
+      value -= (1L << 24);
+  }
+  return value;
 }
