@@ -14,6 +14,10 @@ Q2HX711				KEYWORD1	Q2HX711
 
 readyToSend				KEYWORD2
 read			KEYWORD2
+readScaled		KEYWORD2
+setOffset		KEYWORD2
+setScale		KEYWORD2
+tare            KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
