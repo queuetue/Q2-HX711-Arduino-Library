@@ -1,5 +1,8 @@
 #include <Q2HX711.h>
 
+// Simple example: Returns raw values from the HX711 chip.
+// See the example tare_and_scaling for a more complete example.
+
 const byte hx711_data_pin = A2;
 const byte hx711_clock_pin = A3;
 
@@ -10,6 +13,6 @@ void setup() {
 }
 
 void loop() {
-  Serial.println(hx711.read()/100.0);
+  Serial.println(hx711.read());
   delay(500);
 }
