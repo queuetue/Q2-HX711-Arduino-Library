@@ -22,6 +22,10 @@ Function  | Description
 ------------- | -------------
 **read**  | Returns a long integer that is the current value of the HX711
 **readyToSend**  | Returns a boolean indicating if the HX711 is prepared to send data.
+**readScaled** | Returns a float, the current value adjusted for offset and scale.
+**setOffset** | Sets a new raw offset to the specified value.
+**tare** | Sets the raw offset from the average of a number of current reading.
+**setScale** | Sets a new scaling factor for readScaled.
 
 ## Example
 
