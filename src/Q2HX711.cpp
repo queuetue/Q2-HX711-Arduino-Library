@@ -5,14 +5,19 @@ Q2HX711::Q2HX711(byte output_pin, byte clock_pin) {
   CLOCK_PIN  = clock_pin;
   OUT_PIN  = output_pin;
   GAIN = 1;
-  pinMode(CLOCK_PIN, OUTPUT);
-  pinMode(OUT_PIN, INPUT);
+  pinsConfigured = false;
 }
 
 Q2HX711::~Q2HX711() {
 }
 
 bool Q2HX711::readyToSend() {
+  if (!pinsConfigured) {
+    // We need to set the pin mode once, but not in the constructor
+    pinMode(CLOCK_PIN, OUTPUT);
+    pinMode(OUT_PIN, INPUT);
+    pinsConfigured = true;
+  }
   return digitalRead(OUT_PIN) == LOW;
 }
 
