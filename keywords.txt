@@ -6,7 +6,7 @@
 # Datatypes (KEYWORD1)
 #######################################
 
-Q2HX711	KEYWORD1	Q2HX711
+Q2HX711	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
