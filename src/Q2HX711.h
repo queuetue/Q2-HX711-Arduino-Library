@@ -16,6 +16,6 @@ class Q2HX711
     bool readyToSend();
     void setGain(byte gain = 128);
     long read();
-};
+} // Semicolon removed due to the error :: multiple types in one declaration
 
 #endif /* Q2HX711_h */
